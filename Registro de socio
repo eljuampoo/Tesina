@@ -1,0 +1,94 @@
+"Registros de socios en club barrial"
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Socios</title>
+</head>
+<body>
+    <h2>Registrar Socio</h2>
+    <form action="guardar_socio.php" method="POST">
+        <label>Nombre:</label><br>
+        <input type="text" name="nombre" required><br>
+
+        <label>Apellido:</label><br>
+        <input type="text" name="apellido" required><br>
+
+        <label>DNI:</label><br>
+        <input type="text" name="dni" required><br>
+
+        <label>Fecha de nacimiento:</label><br>
+        <input type="date" name="fecha_nacimiento"><br>
+
+        <label>Teléfono:</label><br>
+        <input type="text" name="telefono"><br><br>
+
+        <input type="submit" value="Guardar">
+    </form>
+</body>
+</html>
+
+
+php
+Copy
+Edit
+<?php
+$conexion = new mysqli("localhost", "root", "", "club_barrial");
+
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+
+$nombre = $_POST['nombre'];
+$apellido = $_POST['apellido'];
+$dni = $_POST['dni'];
+$fecha_nacimiento = $_POST['fecha_nacimiento'];
+$telefono = $_POST['telefono'];
+
+$sql = "INSERT INTO socios (nombre, apellido, dni, fecha_nacimiento, telefono)
+        VALUES ('$nombre', '$apellido', '$dni', '$fecha_nacimiento', '$telefono')";
+
+if ($conexion->query($sql) === TRUE) {
+    echo "Socio registrado correctamente.";
+} else {
+    echo "Error: " . $sql . "<br>" . $conexion->error;
+}
+
+$conexion->close();
+?>
+
+Objetivos del Proyecto
+Crear una base de datos estructurada para gestionar socios de un club barrial.
+Esto permite almacenar la información personal de manera ordenada, segura y accesible.
+
+Diseñar un formulario web sencillo para registrar nuevos socios.
+Facilita la captura de datos desde una interfaz amigable, accesible desde cualquier navegador.
+
+Implementar una conexión entre el formulario HTML y la base de datos a través de PHP.
+Automatiza el almacenamiento de datos sin necesidad de intervención manual.
+
+Proveer una solución funcional y práctica para clubes barriales sin sistemas informáticos complejos.
+Apoya a organizaciones pequeñas que suelen trabajar con recursos limitados.
+
+🧠 Fundamentación del Proyecto
+Necesidad de digitalización en organizaciones comunitarias:
+Muchos clubes barriales aún gestionan su información en papel o de manera desorganizada. Este proyecto contribuye a la modernización con una solución básica pero efectiva.
+
+Accesibilidad tecnológica:
+Usar herramientas como HTML, PHP y MySQL garantiza que el sistema se pueda implementar con tecnologías libres y ampliamente soportadas (como XAMPP o Laragon).
+
+Facilidad de implementación:
+Cualquier persona con conocimientos básicos en informática puede replicar este sistema. No se requieren servidores en la nube ni conocimientos avanzados.
+
+Seguridad básica mediante validación y estructura de base de datos:
+La base de datos tiene restricciones como claves primarias y valores únicos (DNI), que previenen duplicaciones accidentales.
+
+Escalabilidad:
+Este sistema puede ser fácilmente ampliado con más funcionalidades: listados de socios, edición, eliminación, exportación de datos, etc.
+
+
+
